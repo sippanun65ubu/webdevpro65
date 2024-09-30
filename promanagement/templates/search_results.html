@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="text-3xl font-bold mb-4">Search Results</h1>
+
+  {% if posts %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for post in posts %}
+        <div class="border border-gray-300 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+          <h2 class="text-xl font-semibold mb-2">
+            <a href="{% url 'post-detail' post.pk %}" class="hover:text-blue-500">{{ post.title }}</a>
+          </h2>
+          <p class="text-gray-600 mb-2">By {{ post.author.username }} on {{ post.created_at|date:"F j, Y, g:i a" }}</p>
+          {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="mb-4 rounded">
+          {% endif %}
+          <p class="text-gray-800">{{ post.content|truncatewords:30 }}</p>
+          <p class="text-gray-600">Category: {{ post.category.name }}</p>
+          <a href="{% url 'post-detail' post.pk %}" class="text-blue-500 hover:text-blue-700 mt-4 block">Read More</a>
+        </div>
+      {% empty %}
+        <p>No posts found.</p>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No results found for your search.</p>
+  {% endif %}
+{% endblock %}

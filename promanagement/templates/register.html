@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load static %}  <!-- Add this line to load static files -->
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-8">
+        <h2 class="text-3xl text-center font-bold mb-6">Register</h2>
+        <form method="POST" class="w-full max-w-sm mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Register</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

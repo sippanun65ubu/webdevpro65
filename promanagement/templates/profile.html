@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-2xl font-bold mb-4">Your Profile</h1>
+    
+    <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2">Profile Picture</label>
+        {% if profile.profile_picture %}
+            <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="rounded-full mb-2 w-24 h-24">
+        {% else %}
+            <p>No profile picture uploaded.</p>
+        {% endif %}
+    </div>
+    
+    <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2">Username</label>
+        <p>{{ user.username }}</p>
+    </div>
+    
+    <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2">Email</label>
+        <p>{{ user.email }}</p>
+    </div>
+    
+    <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2">Bio</label>
+        <p>{{ profile.bio }}</p>
+    </div>
+    
+    <a href="{% url 'edit_profile' %}" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Edit Profile</a>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}  <!-- This line loads the static files tag -->
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">  <!-- This will now work -->
+</head>
+<body class="bg-gray-100">
+
+    <div class="container mx-auto p-8">
+        <h2 class="text-3xl text-center font-bold mb-6">Login</h2>
+        <form method="POST" class="w-full max-w-sm mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                    Login
+                </button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
+{% endblock %}

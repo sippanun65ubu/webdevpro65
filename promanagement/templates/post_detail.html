@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="text-3xl font-bold mb-4">{{ object.title }}</h1>
+  <p class="text-gray-600 mb-2">By {{ object.author.username }} on {{ object.created_at|date:"F j, Y, g:i a" }}</p>
+  
+  {% if object.image %}
+    <img src="{{ object.image.url }}" alt="{{ object.title }}" class="mb-4 rounded">
+  {% endif %}
+  
+  <p class="text-gray-800 mb-4">{{ object.content }}</p>
+  <p class="text-gray-600">Category: {{ object.category.name }}</p> <!-- Display category -->
+
+  <div class="mt-4">
+    {% if user.is_authenticated %}
+        <form action="{% url 'like-post' object.pk %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="text-blue-500 hover:text-blue-700">
+                Like ({{ object.total_likes }})
+            </button>
+        </form>
+        <form action="{% url 'dislike-post' object.pk %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="text-red-500 hover:text-red-700">
+                Dislike ({{ object.total_dislikes }})
+            </button>
+        </form>
+    {% endif %}
+</div>
+
+  <a href="{% url 'home' %}" class="text-blue-500 hover:text-blue-700">Back to Home</a>
+{% endblock %}
